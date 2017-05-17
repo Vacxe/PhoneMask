@@ -1,4 +1,4 @@
-package ru.nitrobubbles.phonemask
+package com.github.vacxe.phonemask
 
 /**
  * Created by konstantinaksenov on 17.05.17.

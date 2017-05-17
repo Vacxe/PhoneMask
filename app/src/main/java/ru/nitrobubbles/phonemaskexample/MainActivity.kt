@@ -3,8 +3,8 @@ package ru.nitrobubbles.phonemaskexample
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
-import ru.nitrobubbles.phonemask.PhoneMaskManager
-import ru.nitrobubbles.phonemask.ValueListener
+import com.github.vacxe.phonemask.PhoneMaskManager
+import com.github.vacxe.phonemask.ValueListener
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         PhoneMaskManager()
                 .withMask(" (###) ###-##-##")
                 .withRegion("+7")
-                .withValueListener(object : ValueListener{
+                .withValueListener(object : ValueListener {
                     override fun onPhoneChanged(phone: String) {
                         System.out.println(phone)
                     }

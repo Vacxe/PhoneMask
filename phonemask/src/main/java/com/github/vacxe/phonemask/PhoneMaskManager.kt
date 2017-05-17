@@ -1,4 +1,4 @@
-package ru.nitrobubbles.phonemask
+package com.github.vacxe.phonemask
 
 import android.widget.EditText
 
