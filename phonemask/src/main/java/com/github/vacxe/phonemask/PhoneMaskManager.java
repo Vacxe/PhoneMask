@@ -13,9 +13,6 @@ public class PhoneMaskManager {
     private String region = "";
     private ValueListener valueListener = null;
 
-    /**
-     * @field mask - default mask symbol is #
-     */
     public PhoneMaskManager withMask(String mask)  {
         this.mask = mask;
         return this;

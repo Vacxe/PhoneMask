@@ -1,12 +1,14 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
 
 ext {
     bintrayRepo = 'maven'
-    bintrayName = 'android-phonemask'
+    bintrayName = 'PhoneMask'
 
     publishedGroupId = 'com.github.vacxe'
     libraryName = 'AndroidPhoneMask'
-    artifact = 'androidphonemask'
+    artifact = 'phonemask'
 
     libraryDescription = 'Android library for EditText. Easy way for add phone readability in your project.'
 

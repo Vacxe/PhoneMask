@@ -8,8 +8,6 @@ import java.util.Queue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import kotlin.text.Regex;
-
 /**
  * Created by konstantinaksenov on 17.05.17.
  */
@@ -26,7 +24,7 @@ class PhoneMaskWatcher implements TextWatcher {
 
     private String result = "";
     private EditState state = EditState.IDLE;
-    private Regex notDigitRegex = new Regex("[^\\d]+");
+    private Pattern notDigitRegex = Pattern.compile("[^\\d]+");
 
 
     @Override
@@ -49,8 +47,7 @@ class PhoneMaskWatcher implements TextWatcher {
 
         if (state == EditState.IDLE) {
             String rawString = value.replace(region, "");
-            rawString = notDigitRegex.replace(rawString, "");
-
+            rawString = notDigitRegex.matcher(rawString).replaceAll("");
             Queue<Character> charsQueue = new LinkedList<>();
             for (char c : rawString.toCharArray()) {
                 charsQueue.add(c);
@@ -73,7 +70,7 @@ class PhoneMaskWatcher implements TextWatcher {
                 }
             }
 
-            String phone = notDigitRegex.replace(rawMaskBuilder.toString(), "");
+            String phone = notDigitRegex.matcher(rawMaskBuilder.toString()).replaceAll("");
             valueListener.onPhoneChanged("+" + phone);
             state = EditState.EDIT;
         }
