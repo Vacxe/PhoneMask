@@ -32,3 +32,27 @@ If you want to receive callback from EditText just add ValueListener, and you re
 - bindTo 
 (required calling)
 Afrer setup just call this method for binding to `EditText`
+
+### Download
+
+```xml
+<dependency>
+  <groupId>com.github.vacxe</groupId>
+  <artifactId>phonemask</artifactId>
+  <version>1.0.1</version>
+  <type>pom</type>
+</dependency>
+```
+or Gradle:
+```groovy
+
+ repositories {
+     maven {
+         url  "https://dl.bintray.com/vacxe2/maven"
+     }
+ }
+
+dependencies {
+    compile 'com.github.vacxe:phonemask:1.0.1'
+}
+```
