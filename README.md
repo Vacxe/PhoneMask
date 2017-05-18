@@ -46,11 +46,9 @@ Afrer setup just call this method for binding to `EditText`
 or Gradle:
 ```groovy
 
- repositories {
-     maven {
-         url  "https://dl.bintray.com/vacxe2/maven"
-     }
- }
+repositories {
+    jcenter()
+}
 
 dependencies {
     compile 'com.github.vacxe:phonemask:1.0.1'
