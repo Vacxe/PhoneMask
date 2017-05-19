@@ -1,6 +1,9 @@
 # PhoneMask
 PhoneMask is lightweight android library for EditText formatting. Easy way for add phone readability in your project.
 
+
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-PhoneMask-green.svg?style=true)](https://android-arsenal.com/details/1/5770)
+
 ## How to use it
 Just use PhoneMaskManager class
 ```kotlin
