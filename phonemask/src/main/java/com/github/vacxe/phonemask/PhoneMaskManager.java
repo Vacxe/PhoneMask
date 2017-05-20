@@ -12,6 +12,7 @@ public class PhoneMaskManager {
     private String mask = null;
     private String region = "";
     private ValueListener valueListener = null;
+    private View.OnFocusChangeListener onFocusChangeListener = null;
 
     public PhoneMaskManager withMask(String mask)  {
         this.mask = mask;
@@ -28,6 +29,11 @@ public class PhoneMaskManager {
         return this;
     }
 
+    public PhoneMaskManager withOnFocusChangeListener(View.OnFocusChangeListener onFocusChangeListener)  {
+        this.onFocusChangeListener = onFocusChangeListener;
+        return this;
+    }
+
     public void bindTo(final EditText editText) {
         if (mask == null) {
             Log.e("PhoneMaskManager", "Mask can't be null");
@@ -39,6 +45,10 @@ public class PhoneMaskManager {
                         if (editText.getText().toString().isEmpty()) {
                             editText.setText(region);
                         }
+                    }
+
+                    if(onFocusChangeListener != null){
+                        onFocusChangeListener.onFocusChange(v, hasFocus);
                     }
                 }
             });
