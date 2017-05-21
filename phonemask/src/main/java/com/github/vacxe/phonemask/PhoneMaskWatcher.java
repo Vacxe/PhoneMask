@@ -29,6 +29,7 @@ class PhoneMaskWatcher implements TextWatcher {
     private String result = "";
     private EditState state = EditState.IDLE;
 
+    private String phoneString = "";
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -49,8 +50,9 @@ class PhoneMaskWatcher implements TextWatcher {
         }
 
         if (state == EditState.IDLE) {
-            if(s.toString().isEmpty()){
-              return;
+            if (s.toString().isEmpty()) {
+                phoneString = "";
+                return;
             }
 
             String rawString = value.replace(region, "");
@@ -77,11 +79,15 @@ class PhoneMaskWatcher implements TextWatcher {
             }
 
             String phone = notDigitRegex.matcher(rawMaskBuilder.toString()).replaceAll("");
-            valueListener.onPhoneChanged("+" + phone);
+            this.phoneString = "+" + phone;
+
+            if(valueListener != null) {
+                valueListener.onPhoneChanged(this.phoneString);
+            }
             state = EditState.EDIT;
         }
 
-        switch (state){
+        switch (state) {
             case EDIT:
                 state = EditState.CLEAR;
                 s.clear();
@@ -95,6 +101,9 @@ class PhoneMaskWatcher implements TextWatcher {
         }
     }
 
+    public String getPhone() {
+        return phoneString;
+    }
 
     enum EditState {
         IDLE, EDIT, CLEAR, RELEASE
