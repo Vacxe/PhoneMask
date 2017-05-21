@@ -17,11 +17,13 @@ class PhoneMaskWatcher implements TextWatcher {
     private final String mask;
     private final String region;
     private final ValueListener valueListener;
+    private final Pattern maskPattern;
 
-    PhoneMaskWatcher(String mask, String region, ValueListener valueListener) {
+    PhoneMaskWatcher(String mask, String region, ValueListener valueListener, String maskSymbol) {
         this.mask = mask;
         this.region = region;
         this.valueListener = valueListener;
+        this.maskPattern = Pattern.compile(maskSymbol);
     }
 
     private String result = "";
@@ -59,8 +61,7 @@ class PhoneMaskWatcher implements TextWatcher {
             }
 
             StringBuilder rawMaskBuilder = new StringBuilder(region + mask);
-            Pattern pattern = Pattern.compile("#");
-            Matcher matcher = pattern.matcher(region + mask);
+            Matcher matcher = maskPattern.matcher(region + mask);
             while (matcher.find()) {
                 int start = matcher.start();
                 if (!charsQueue.isEmpty()) {

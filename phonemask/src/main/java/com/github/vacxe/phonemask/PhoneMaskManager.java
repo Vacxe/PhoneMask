@@ -16,6 +16,7 @@ public class PhoneMaskManager {
     private String region = "";
     private ValueListener valueListener = null;
     private View.OnFocusChangeListener onFocusChangeListener = null;
+    private String maskSymbol = "#";
 
     public PhoneMaskManager withMask(String mask) {
         this.mask = mask;
@@ -36,6 +37,12 @@ public class PhoneMaskManager {
         this.onFocusChangeListener = onFocusChangeListener;
         return this;
     }
+
+    public PhoneMaskManager withMaskSymbol(String maskSymbol) {
+        this.maskSymbol = maskSymbol;
+        return this;
+    }
+
 
     public void bindTo(final EditText editText) {
         if (mask == null) {
@@ -62,7 +69,7 @@ public class PhoneMaskManager {
                     }
                 }
             });
-            editText.addTextChangedListener(new PhoneMaskWatcher(mask, region, valueListener));
+            editText.addTextChangedListener(new PhoneMaskWatcher(mask, region, valueListener, maskSymbol));
         }
 
     }

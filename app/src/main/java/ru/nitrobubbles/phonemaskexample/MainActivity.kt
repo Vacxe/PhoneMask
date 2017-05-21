@@ -14,14 +14,15 @@ class MainActivity : AppCompatActivity() {
         PhoneMaskManager()
                 .withMask(" (###) ###-##-##")
                 .withRegion("+7")
-                .withValueListener(object : ValueListener {
-                    override fun onPhoneChanged(phone: String) {
-                        System.out.println(phone)
-                    }
-                })
+                .withValueListener { phone -> System.out.println(phone) }
                 .bindTo((findViewById(R.id.text_edit_text) as EditText))
 
-
+        PhoneMaskManager()
+                .withMaskSymbol("\\*")
+                .withMask("(***)***-**-**")
+                .withRegion("+923")
+                .withValueListener { phone -> System.out.println(phone) }
+                .bindTo((findViewById(R.id.text_edit_text2) as EditText))
 
     }
 }
