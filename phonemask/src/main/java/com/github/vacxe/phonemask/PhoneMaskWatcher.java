@@ -8,6 +8,8 @@ import java.util.Queue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.github.vacxe.phonemask.Utils.notDigitRegex;
+
 /**
  * Created by konstantinaksenov on 17.05.17.
  */
@@ -24,7 +26,6 @@ class PhoneMaskWatcher implements TextWatcher {
 
     private String result = "";
     private EditState state = EditState.IDLE;
-    private Pattern notDigitRegex = Pattern.compile("[^\\d]+");
 
 
     @Override
@@ -46,6 +47,10 @@ class PhoneMaskWatcher implements TextWatcher {
         }
 
         if (state == EditState.IDLE) {
+            if(s.toString().isEmpty()){
+              return;
+            }
+
             String rawString = value.replace(region, "");
             rawString = notDigitRegex.matcher(rawString).replaceAll("");
             Queue<Character> charsQueue = new LinkedList<>();

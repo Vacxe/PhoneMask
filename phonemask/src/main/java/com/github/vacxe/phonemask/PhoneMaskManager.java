@@ -4,6 +4,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import static com.github.vacxe.phonemask.Utils.notDigitRegex;
+
 /**
  * Created by konstantinaksenov on 17.05.17.
  */
@@ -14,22 +16,22 @@ public class PhoneMaskManager {
     private ValueListener valueListener = null;
     private View.OnFocusChangeListener onFocusChangeListener = null;
 
-    public PhoneMaskManager withMask(String mask)  {
+    public PhoneMaskManager withMask(String mask) {
         this.mask = mask;
         return this;
     }
 
-    public PhoneMaskManager withRegion(String region)  {
+    public PhoneMaskManager withRegion(String region) {
         this.region = region;
         return this;
     }
 
-    public PhoneMaskManager withValueListener(ValueListener valueListener)  {
+    public PhoneMaskManager withValueListener(ValueListener valueListener) {
         this.valueListener = valueListener;
         return this;
     }
 
-    public PhoneMaskManager withOnFocusChangeListener(View.OnFocusChangeListener onFocusChangeListener)  {
+    public PhoneMaskManager withOnFocusChangeListener(View.OnFocusChangeListener onFocusChangeListener) {
         this.onFocusChangeListener = onFocusChangeListener;
         return this;
     }
@@ -45,9 +47,15 @@ public class PhoneMaskManager {
                         if (editText.getText().toString().isEmpty()) {
                             editText.setText(region);
                         }
+                    } else {
+                        String input = notDigitRegex.matcher(editText.getText().toString()).replaceAll("");
+                        String region = notDigitRegex.matcher(PhoneMaskManager.this.region).replaceAll("");
+                        if (input.equals(region)) {
+                            editText.setText("");
+                        }
                     }
 
-                    if(onFocusChangeListener != null){
+                    if (onFocusChangeListener != null) {
                         onFocusChangeListener.onFocusChange(v, hasFocus);
                     }
                 }
