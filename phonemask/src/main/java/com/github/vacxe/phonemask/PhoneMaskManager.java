@@ -1,5 +1,6 @@
 package com.github.vacxe.phonemask;
 
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -40,6 +41,7 @@ public class PhoneMaskManager {
         if (mask == null) {
             Log.e("PhoneMaskManager", "Mask can't be null");
         } else {
+            editText.setInputType(InputType.TYPE_CLASS_PHONE);
             editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View v, boolean hasFocus) {
