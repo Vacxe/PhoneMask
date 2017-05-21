@@ -19,22 +19,35 @@ Just use PhoneMaskManager class
 ```
 
 ### About methods
-- withMask 
+#### Init methods
+- **withMask** 
 (required field)
 Init your mask format. Use `#` symbol by default
 
-- withRegion
+- **withMaskSymbol** 
+(optional field)
+Changing default symbol mask
+
+- **withRegion**
 (optional field)
 Init your region
 
-- withValueListener 
+- **withValueListener**
 (optional field)
 If you want to receive callback from EditText just add ValueListener, and you receive phone string in clear format 
 (For example: +70009199191)
 
-- bindTo 
+- **withOnFocusChangeListener**
+(optional field)
+If you want to set OnFocusChangeListener for EditText use this method
+
+- **bindTo** 
 (required calling)
 Afrer setup just call this method for binding to `EditText`
+
+#### Get methods
+- **getPhone** 
+Return phone in clear format (For example: +70009199191)
 
 ### Download
 
@@ -42,7 +55,7 @@ Afrer setup just call this method for binding to `EditText`
 <dependency>
   <groupId>com.github.vacxe</groupId>
   <artifactId>phonemask</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <type>pom</type>
 </dependency>
 ```
@@ -54,6 +67,6 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.vacxe:phonemask:1.0.1'
+    compile 'com.github.vacxe:phonemask:1.0.2'
 }
 ```
