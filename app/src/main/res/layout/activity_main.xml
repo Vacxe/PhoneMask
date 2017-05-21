@@ -27,4 +27,10 @@
         android:id="@+id/text_edit_text2"
         android:hint="Phone number" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get phone value"
+        android:id="@+id/get_phone_button"/>
+
 </LinearLayout>

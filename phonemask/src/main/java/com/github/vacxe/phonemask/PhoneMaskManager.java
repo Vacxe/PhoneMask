@@ -18,6 +18,8 @@ public class PhoneMaskManager {
     private View.OnFocusChangeListener onFocusChangeListener = null;
     private String maskSymbol = "#";
 
+    private PhoneMaskWatcher phoneMaskWatcher = null;
+
     public PhoneMaskManager withMask(String mask) {
         this.mask = mask;
         return this;
@@ -43,8 +45,12 @@ public class PhoneMaskManager {
         return this;
     }
 
+    public String getPhone(){
+        return phoneMaskWatcher.getPhone();
+    }
 
-    public void bindTo(final EditText editText) {
+
+    public PhoneMaskManager bindTo(final EditText editText) {
         if (mask == null) {
             Log.e("PhoneMaskManager", "Mask can't be null");
         } else {
@@ -69,8 +75,11 @@ public class PhoneMaskManager {
                     }
                 }
             });
-            editText.addTextChangedListener(new PhoneMaskWatcher(mask, region, valueListener, maskSymbol));
+            phoneMaskWatcher = new PhoneMaskWatcher(mask, region, valueListener, maskSymbol);
+            editText.addTextChangedListener(phoneMaskWatcher);
         }
+
+        return this;
 
     }
 }
