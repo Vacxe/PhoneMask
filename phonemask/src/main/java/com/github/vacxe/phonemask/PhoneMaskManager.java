@@ -1,7 +1,6 @@
 package com.github.vacxe.phonemask;
 
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -45,41 +44,36 @@ public class PhoneMaskManager {
         return this;
     }
 
-    public String getPhone(){
+    public String getPhone() {
         return phoneMaskWatcher.getPhone();
     }
 
 
     public PhoneMaskManager bindTo(final EditText editText) {
-        if (mask == null) {
-            Log.e("PhoneMaskManager", "Mask can't be null");
-        } else {
-            editText.setInputType(InputType.TYPE_CLASS_PHONE);
-            editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                @Override
-                public void onFocusChange(View v, boolean hasFocus) {
-                    if (hasFocus) {
-                        if (editText.getText().toString().isEmpty()) {
-                            editText.setText(region);
-                        }
-                    } else {
-                        String input = notDigitRegex.matcher(editText.getText().toString()).replaceAll("");
-                        String region = notDigitRegex.matcher(PhoneMaskManager.this.region).replaceAll("");
-                        if (input.equals(region)) {
-                            editText.setText("");
-                        }
+        Utils.validatePresetup(editText, mask);
+        editText.setInputType(InputType.TYPE_CLASS_PHONE);
+        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    if (editText.getText().toString().isEmpty()) {
+                        editText.setText(region);
                     }
-
-                    if (onFocusChangeListener != null) {
-                        onFocusChangeListener.onFocusChange(v, hasFocus);
+                } else {
+                    String input = notDigitRegex.matcher(editText.getText().toString()).replaceAll("");
+                    String region = notDigitRegex.matcher(PhoneMaskManager.this.region).replaceAll("");
+                    if (input.equals(region)) {
+                        editText.setText("");
                     }
                 }
-            });
-            phoneMaskWatcher = new PhoneMaskWatcher(mask, region, valueListener, maskSymbol);
-            editText.addTextChangedListener(phoneMaskWatcher);
-        }
 
+                if (onFocusChangeListener != null) {
+                    onFocusChangeListener.onFocusChange(v, hasFocus);
+                }
+            }
+        });
+        phoneMaskWatcher = new PhoneMaskWatcher(mask, region, valueListener, maskSymbol);
+        editText.addTextChangedListener(phoneMaskWatcher);
         return this;
-
     }
 }
