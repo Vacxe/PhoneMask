@@ -72,7 +72,7 @@ public class PhoneMaskManager {
                 }
             }
         });
-        phoneMaskWatcher = new PhoneMaskWatcher(mask, region, valueListener, maskSymbol);
+        phoneMaskWatcher = new PhoneMaskWatcher(mask, region, valueListener, maskSymbol, editText);
         editText.addTextChangedListener(phoneMaskWatcher);
         return this;
     }

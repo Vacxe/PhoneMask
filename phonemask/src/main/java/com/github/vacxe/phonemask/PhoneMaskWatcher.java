@@ -2,6 +2,7 @@ package com.github.vacxe.phonemask;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.widget.EditText;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -18,22 +19,28 @@ class PhoneMaskWatcher implements TextWatcher {
     private final String region;
     private final ValueListener valueListener;
     private final Pattern maskPattern;
+    private final EditText editText;
 
-    PhoneMaskWatcher(String mask, String region, ValueListener valueListener, String maskSymbol) {
+    PhoneMaskWatcher(String mask, String region, ValueListener valueListener, String maskSymbol, EditText editText) {
         this.mask = mask;
         this.region = region;
         this.valueListener = valueListener;
         this.maskPattern = Pattern.compile(maskSymbol);
+        this.editText = editText;
     }
 
     private String result = "";
     private EditState state = EditState.IDLE;
+    private Integer cursorPosition;
+    private Integer cursorShifting;
 
     private String phoneString = "";
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+        if (state == EditState.IDLE) {
+            cursorShifting = s.length();
+        }
     }
 
     @Override
@@ -45,6 +52,21 @@ class PhoneMaskWatcher implements TextWatcher {
     public void afterTextChanged(Editable s) {
         final String value = s.toString();
         if (state == EditState.RELEASE) {
+            cursorShifting = s.length() - cursorShifting;
+            cursorPosition = cursorPosition + cursorShifting;
+            if (cursorShifting > 0) {
+                if (cursorPosition < value.length()) {
+                    cursorPosition--;
+                    if (!Character.isDigit(value.charAt(cursorPosition))) {
+                        cursorPosition++;
+                    }
+                }
+            } else {
+                cursorPosition++;
+            }
+
+            editText.setSelection(Math.max(0, Math.min(cursorPosition, value.length())));
+
             state = EditState.IDLE;
             return;
         }
@@ -52,8 +74,11 @@ class PhoneMaskWatcher implements TextWatcher {
         if (state == EditState.IDLE) {
             if (s.toString().isEmpty()) {
                 phoneString = "";
+                cursorPosition = 0;
                 return;
             }
+
+            cursorPosition = editText.getSelectionStart();
 
             String rawString = value.replace(region, "");
             rawString = notDigitRegex.matcher(rawString).replaceAll("");
@@ -81,7 +106,7 @@ class PhoneMaskWatcher implements TextWatcher {
             String phone = notDigitRegex.matcher(rawMaskBuilder.toString()).replaceAll("");
             this.phoneString = "+" + phone;
 
-            if(valueListener != null) {
+            if (valueListener != null) {
                 valueListener.onPhoneChanged(this.phoneString);
             }
             state = EditState.EDIT;
