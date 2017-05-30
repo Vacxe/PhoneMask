@@ -55,7 +55,7 @@ Return phone in clear format (For example: +70009199191)
 <dependency>
   <groupId>com.github.vacxe</groupId>
   <artifactId>phonemask</artifactId>
-  <version>1.0.3</version>
+  <version>1.0.4</version>
   <type>pom</type>
 </dependency>
 ```
@@ -67,6 +67,6 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.vacxe:phonemask:1.0.3'
+    compile 'com.github.vacxe:phonemask:1.0.4'
 }
 ```
