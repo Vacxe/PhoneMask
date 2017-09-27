@@ -15,7 +15,7 @@ ext {
     siteUrl = 'https://github.com/vacxe/PhoneMask'
     gitUrl = 'https://github.com/vacxe/PhoneMask.git'
 
-    libraryVersion = '1.0.4'
+    libraryVersion = '1.0.5'
 
     developerId = 'vacxe'
     developerName = 'Konstantin Aksenov'
@@ -33,8 +33,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 25
-        versionCode 5
-        versionName "1.0.4"
+        versionCode 6
+        versionName "1.0.5"
 
     }
     sourceSets {
@@ -49,7 +49,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'org.jetbrains.kotlin:kotlin-stdlib:1.1.2-3'
 }
 
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
