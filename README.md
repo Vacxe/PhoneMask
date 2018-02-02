@@ -23,7 +23,7 @@ You can also use this in Java,
  new PhoneMaskManager()
                 .withMask(" (###) ###-##")
                 .withRegion("+255")
-                .bindTo(EditText)findViewById(R.id.text_edit_text))
+                .bindTo((EditText)findViewById(R.id.text_edit_text))
 ```
 
 ### About methods
