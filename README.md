@@ -5,7 +5,7 @@ PhoneMask is lightweight android library for EditText formatting. Easy way for a
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-PhoneMask-green.svg?style=true)](https://android-arsenal.com/details/1/5770)
 
 ## How to use it
-Just use PhoneMaskManager class
+In Kotlin Just use PhoneMaskManager class
 ```kotlin
  PhoneMaskManager()
                 .withMask(" (###) ###-##-##")
@@ -16,6 +16,14 @@ Just use PhoneMaskManager class
                     }
                 })
                 .bindTo((findViewById(R.id.text_edit_text) as EditText))
+```
+
+You can also use this in Java,  
+```java
+ new PhoneMaskManager()
+                .withMask(" (###) ###-##")
+                .withRegion("+255")
+                .bindTo((EditText)findViewById(R.id.text_edit_text))
 ```
 
 ### About methods
